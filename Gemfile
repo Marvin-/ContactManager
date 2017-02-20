@@ -19,6 +19,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem "haml-rails", "~> 0.9"
 gem 'unicorn'
+gem 'capybara'
+
 
 
 group :development, :test do

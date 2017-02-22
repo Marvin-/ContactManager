@@ -13,7 +13,10 @@
       = phone.number
       = link_to('edit', edit_phone_number_path(phone))
       = link_to('delete', phone_number_path(phone), data: {confirm: 'Are you sure?'}, method: 'DELETE')
-
+%ul
+  - @person.email_addresses.each do |email|
+    %li
+      = email.address
 = link_to 'Add phone number', new_phone_number_path(person_id: @person.id)
 \|
 = link_to 'Edit', edit_person_path(@person)

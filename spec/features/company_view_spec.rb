@@ -52,6 +52,55 @@ describe 'the company view', type: :feature do
       end
     end
   end
+
+  describe 'email addresses' do 
+    before(:each) do
+      company.email_addresses.create(address: "hotmail1")
+      company.email_addresses.create(address: "hotmail2")
+      visit company_path(company)
+    end
+
+    it 'show the email address' do 
+      company.email_addresses.each do |email|
+        expect(page).to have_content(email.address)
+      end
+    end
+
+    it 'has link to add email address' do 
+      expect(page).to have_link('Add email address', href: new_email_address_path(contact_id: company.id, contact_type: 'Company'))
+    end
+
+    it 'adds new email address' do 
+      page.click_link('Add email address')
+      page.fill_in('Address', with: 'email@hotmail.com')
+      page.click_button('Save')
+      expect(page.current_path).to eq(company_path(company))
+      expect(page).to have_content('email@hotmail.com')
+    end
+
+    it 'has link to edit email address' do 
+      company.email_addresses.each do |email|
+        expect(page).to have_link('edit', href: edit_email_address_path(email))
+      end
+    end
+
+    it 'edits email address' do 
+      email = company.email_addresses.first
+      old_email = email
+
+      first(:link, 'edit').click
+      page.fill_in('Address', with: 'new_email_address')
+      page.click_button('Save')
+      expect(current_path).to eq(company_path(company))
+      expect(page).to have_content('new_email_address')
+    end
+
+    it 'has a link to delete email address' do 
+      company.email_addresses.each do |email|
+        expect(page).to have_link('delete', href: email_address_path(email))
+      end
+    end
+  end
 end
 
 

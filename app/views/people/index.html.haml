@@ -6,18 +6,22 @@
       %th First name
       %th Last name
       %th
-      %th
-      %th
 
   %tbody
     - @people.each do |person|
       %tr
-        %td= person.first_name
-        %td= person.last_name
-        %td= link_to 'Show', person
-        %td= link_to 'Edit', edit_person_path(person)
-        %td= link_to 'Destroy', person, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td
+          %ul
+            %li= person.first_name
+        %td
+          %ul
+            %li= person.last_name
+        %td
+          %ul.actions
+            %li= link_to 'Show', person
+            %li= link_to 'Edit', edit_person_path(person)
+            %li= link_to 'Destroy', person, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Person', new_person_path
+= link_to 'New Person', new_person_path, id: 'new_person'

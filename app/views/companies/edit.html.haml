@@ -1,7 +1,8 @@
-%h1 Editing company
+%h1= "New name for #{@company.name}"
 
 = render 'form'
 
-= link_to 'Show', @company
-\|
-= link_to 'Back', companies_path
+%ul.actions
+  %li= link_to 'Show', @company
+
+  %li= link_to 'Back', companies_path

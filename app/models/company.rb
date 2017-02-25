@@ -3,4 +3,8 @@ class Company < ApplicationRecord
   has_many :email_addresses, as: :contact
 
   validates :name, presence: true
+
+  def to_s
+    "#{name}"
+  end
 end

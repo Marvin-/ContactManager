@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-
+  
   describe "#create" do
 
     it 'creates a user from twitter data' do
@@ -64,6 +64,25 @@ RSpec.describe SessionsController, type: :controller do
       post :create
       expect(response).to redirect_to(root_path)
     end
+  end
 
+  describe "#destroy" do 
+    before(:each) do
+      Rails.application.routes.draw do
+        root to: 'site#index'
+        delete "/logout" => "sessions#destroy", as: :logout
+        resource :sessions, :only => [:create, :destroy]
+      end
+      delete :destroy
+      session[:user_id] = nil
+    end
+
+    it 'destroys session when logged out' do 
+      expect(session[:user_id]).to eq(nil)
+    end
+
+    it 'redirects to home page' do 
+      expect(response).to redirect_to(root_path)
+    end
   end
 end

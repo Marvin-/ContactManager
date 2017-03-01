@@ -10,6 +10,11 @@ end
 RSpec.describe 'the application', type: :feature do 
   context 'when logged out' do
     before(:each) do
+      Rails.application.routes.draw do
+        root to: 'site#index'
+        get '/login' => redirect('/auth/twitter'), as: :login
+        delete "/logout" => "sessions#destroy", as: :logout
+      end
       visit root_path
     end
 

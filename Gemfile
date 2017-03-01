@@ -21,7 +21,9 @@ gem "haml-rails", "~> 0.9"
 gem 'unicorn'
 gem 'capybara'
 gem 'pry'
-
+gem 'omniauth', '~> 1.6', '>= 1.6.1'
+gem 'omniauth-twitter', '~> 1.4'
+gem 'omniauth-facebook', '~> 3.0'
 
 
 group :development, :test do

@@ -1,8 +1,7 @@
 %p#notice= notice
 
 %h1
-  = @person.first_name + " "
-  = @person.last_name
+  = @person.to_s
 
   = render 'phone_numbers/phone_numbers', :phone_numbers => @person.phone_numbers
   = render 'email_addresses/email_addresses', :email_addresses => @person.email_addresses

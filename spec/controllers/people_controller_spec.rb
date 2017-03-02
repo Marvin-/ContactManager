@@ -23,9 +23,9 @@ RSpec.describe PeopleController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    { first_name: 'Jane', last_name: 'Doe' }
-  }
+
+  let(:user) { Fabricate(:user) }
+  let(:valid_attributes) { { first_name: 'Jane', last_name: 'Doe', user_id: user.id } }
 
   let(:invalid_attributes) {
     { first_name: nil, last_name: nil }
@@ -34,12 +34,14 @@ RSpec.describe PeopleController, type: :controller do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PeopleController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { {user_id: user.id} }
 
   describe "GET #index" do
-    it "assigns all people as @people" do
-      person = Person.create! valid_attributes
-      get :index, params: {}, session: valid_session
+    it "assigns the current user's people" do
+      user = User.create
+      person = Person.create! valid_attributes.merge(user_id: user.id)
+      get :index, {}, {:user_id => user.id}
+      # get :index, params: {}, session: valid_session
       expect(assigns(:people)).to eq([person])
     end
   end

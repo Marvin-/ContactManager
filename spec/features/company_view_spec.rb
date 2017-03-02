@@ -1,12 +1,15 @@
 require 'rails_helper'
+require 'support/omniauth'
 
 describe 'the company view', type: :feature do
-  let(:company) { Company.create(name: 'Tesla') }
+  let(:company) { Fabricate(:company)}
+  let(:user) { company.user}
 
   describe 'phone numbers' do
     before(:each) do
       company.phone_numbers.create(number: "555-1234")
       company.phone_numbers.create(number: "555-5678")
+      login_as(user)
       visit company_path(company)
     end
 
@@ -57,6 +60,7 @@ describe 'the company view', type: :feature do
     before(:each) do
       company.email_addresses.create(address: "hotmail1")
       company.email_addresses.create(address: "hotmail2")
+      login_as(user)
       visit company_path(company)
     end
 

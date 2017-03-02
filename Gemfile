@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'byebug', platform: :mri
+  gem 'fabrication'
 end
 
 group :development do

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Person, type: :model do
   
   let(:person) do
-    Person.new(first_name: 'Alice', last_name: 'Smith')
+    Fabricate(:person)
   end
 
   it 'is invalid without a first name' do
@@ -16,6 +16,10 @@ RSpec.describe Person, type: :model do
     person.last_name = nil
 
     expect(person).not_to be_valid
+  end
+
+  it 'is a child of the user' do
+    expect(person.user).to be_instance_of(User)
   end
 
   it 'responds with its created phone numbers' do 

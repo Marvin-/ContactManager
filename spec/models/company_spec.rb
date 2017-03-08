@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Company, type: :model do
-  let(:company) { Company.new(name: 'Devold')}
+  let(:company) { Fabricate(:company)}
 
   it 'is valid' do 
     expect(company).to be_valid
@@ -24,6 +24,6 @@ RSpec.describe Company, type: :model do
   end
 
   it 'convert to a string with last name, first name' do 
-    expect(company.to_s).to eq "Devold"
+    expect(company.to_s).to eq "Sample company"
   end
 end

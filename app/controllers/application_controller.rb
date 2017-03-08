@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
 
-
   def find_resource
     class_name = params[:controller].singularize
     klass = class_name.camelize.constantize

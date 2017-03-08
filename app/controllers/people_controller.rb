@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
   before_action :find_resource, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /people
   # GET /people.json
   def index
@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new
+    @person = current_user.people.build
   end
 
   # GET /people/1/edit
@@ -68,6 +68,6 @@ class PeopleController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name)
+      params.require(:person).permit(:first_name, :last_name, :user_id)
     end
 end

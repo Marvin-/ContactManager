@@ -37,7 +37,7 @@ RSpec.describe PeopleController, type: :controller do
   let(:valid_session) { {user_id: user.id} }
 
   describe "GET #index" do
-    it "assigns the current user's people" do
+    it "assigns the current users' people" do
       user = User.create
       person = Person.create! valid_attributes.merge(user_id: user.id)
       get :index, {}, {:user_id => user.id}
